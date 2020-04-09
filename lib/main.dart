@@ -3,6 +3,7 @@ import 'package:personal_expenses_flutter/AddExpensesDialog.dart';
 import 'package:personal_expenses_flutter/ExpenseList.dart';
 import 'package:personal_expenses_flutter/model/Data.dart';
 import 'package:personal_expenses_flutter/utils/utils.dart';
+import 'ExpenseDistributionChart.dart';
 
 void main() => runApp(PersonalExpenseStateless());
 
@@ -26,6 +27,8 @@ class PersonalExpensesApp extends StatefulWidget {
 class _PersonalExpensesAppState extends State<PersonalExpensesApp> {
   List<Expense> data = [];
 
+  var _ex = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,12 +45,21 @@ class _PersonalExpensesAppState extends State<PersonalExpensesApp> {
       ),
       body: Container(
         margin: EdgeInsets.all(8),
-        child: data.isEmpty
-            ? Center(child: Text('Nothing Here'))
-            : ExpenseList(data, _deleteElement, _editListElement),
+        child: Column(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ExpenseDistributionChart(data),
+            ),
+            data.isEmpty
+                ? Center(child: Center(child: Text('Nothing Here')))
+                : ExpenseList(
+                    data, _deleteElement, _editListElement, _addElement),
+          ],
+        ),
       ),
       floatingActionButton: Container(
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.bottomRight,
         child: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
@@ -67,6 +79,12 @@ class _PersonalExpensesAppState extends State<PersonalExpensesApp> {
   void _deleteElement(int index) {
     setState(() {
       data.removeAt(index);
+    });
+  }
+
+  void _addElement(Expense e) {
+    setState(() {
+      data.add(e);
     });
   }
 
