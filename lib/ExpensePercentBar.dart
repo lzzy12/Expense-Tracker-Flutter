@@ -8,7 +8,7 @@ class ExpensePercentBar extends StatelessWidget {
 
   ExpensePercentBar(this.expensePercent, this.expense, this.weekday);
 
-  static const height = 50.0;
+  static const height = 60.0;
   static const width = 10.0;
 
   @override
@@ -25,12 +25,21 @@ class ExpensePercentBar extends StatelessWidget {
             Container(
               width: width,
               height: height,
-              color: Colors.grey,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  color: Color.fromRGBO(220, 220, 220, 1),
+                  borderRadius: BorderRadius.circular(20)),
             ),
             Container(
-              color: Colors.blue,
               width: width,
               height: expensePercent * height,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  color: Theme
+                      .of(context)
+                      .primaryColor,
+                  borderRadius: BorderRadius.circular(20)
+              ),
             )
           ],
         ),
