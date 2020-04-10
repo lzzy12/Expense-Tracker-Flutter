@@ -12,12 +12,12 @@ class Expense {
         amount = data.amount,
         date = data.date;
 
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
       'expenseName': expenseName,
       'amount': amount,
-      'date': date
+      'date': date.millisecondsSinceEpoch
     };
   }
 
