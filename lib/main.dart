@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses_flutter/AddExpensesDialog.dart';
 import 'package:personal_expenses_flutter/ExpenseList.dart';
+import 'package:personal_expenses_flutter/NothingAddedWidget.dart';
 import 'package:personal_expenses_flutter/model/Data.dart';
 import 'package:personal_expenses_flutter/utils/utils.dart';
 import 'ExpenseDistributionChart.dart';
@@ -27,8 +28,6 @@ class PersonalExpensesApp extends StatefulWidget {
 class _PersonalExpensesAppState extends State<PersonalExpensesApp> {
   List<Expense> data = [];
 
-  var _ex = DateTime.now();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,14 +51,14 @@ class _PersonalExpensesAppState extends State<PersonalExpensesApp> {
               child: ExpenseDistributionChart(data),
             ),
             data.isEmpty
-                ? Center(child: Center(child: Text('Nothing Here')))
+                ? NothingAddedWidget()
                 : ExpenseList(
                     data, _deleteElement, _editListElement, _addElement),
           ],
         ),
       ),
       floatingActionButton: Container(
-        alignment: Alignment.bottomRight,
+        alignment: Alignment.bottomCenter,
         child: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {

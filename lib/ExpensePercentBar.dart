@@ -8,11 +8,12 @@ class ExpensePercentBar extends StatelessWidget {
 
   ExpensePercentBar(this.expensePercent, this.expense, this.weekday);
 
-  static const height = 60.0;
   static const width = 10.0;
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height / 10;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
