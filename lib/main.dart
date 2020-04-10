@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:personal_expenses_flutter/AddExpensesDialog.dart';
 import 'package:personal_expenses_flutter/ExpenseList.dart';
@@ -42,7 +40,8 @@ class _PersonalExpensesAppState extends State<PersonalExpensesApp> {
           return SplashScreen();
         } else {
           if (snapshot.hasError)
-            return Text('Pff... Database Error: ${snapshot.error}');
+            return Scaffold(
+                body: Text('Pff... Database Error: ${snapshot.error}'));
           this.data = snapshot.data;
           return Scaffold(
             appBar: AppBar(
