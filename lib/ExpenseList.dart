@@ -61,7 +61,17 @@ class ExpenseList extends StatelessWidget {
               elevation: 10.0,
               child: Dismissible(
                 background: Container(
-                  color: Colors.blue,
+                  color: Theme.of(context).primaryColor,
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.delete,
+                          size: 50,
+                          color: Colors.white,
+                        ),
+                      )),
                 ),
                 key: Key(index.toString()),
                 onDismissed: (direction) {
@@ -82,16 +92,18 @@ class ExpenseList extends StatelessWidget {
                 child: ListTile(
                   leading: ClipOval(
                     child: Material(
-                      color: Colors.blue, // button color
+                      color: Theme
+                          .of(context)
+                          .primaryColor, // button color
                       child: InkWell(
                         child: SizedBox(
                           width: 56,
                           height: 56,
                           child: Center(
                               child: Text(
-                            '${expenses[index].amount}',
-                            textAlign: TextAlign.center,
-                          )),
+                                '${expenses[index].amount}',
+                                textAlign: TextAlign.center,
+                              )),
                         ),
                       ),
                     ),

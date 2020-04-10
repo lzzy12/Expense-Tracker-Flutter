@@ -14,7 +14,7 @@ class PersonalExpenseStateless extends StatelessWidget {
       title: 'Personal Expense Tracker App',
       debugShowCheckedModeBanner: false,
       home: PersonalExpensesApp(),
-      theme: ThemeData(primaryColor: Colors.blue),
+      theme: ThemeData(primarySwatch: Colors.blue, accentColor: Colors.blue),
     );
   }
 }

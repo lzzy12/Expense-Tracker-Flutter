@@ -77,7 +77,7 @@ class _BottomAddExpensesDialogueState extends State<BottomAddExpensesDialogue> {
                   width: size.width,
                   child: Text(
                     getFormattedDate(selectedDate),
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(color: Theme.of(context).accentColor),
                   ),
                 ),
               ),
@@ -88,7 +88,9 @@ class _BottomAddExpensesDialogueState extends State<BottomAddExpensesDialogue> {
                   child: GestureDetector(
                     child: Text(
                       'Select Date',
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(color: Theme
+                          .of(context)
+                          .accentColor),
                     ),
                     onTap: () {
                       var today = DateTime.now();
@@ -114,10 +116,12 @@ class _BottomAddExpensesDialogueState extends State<BottomAddExpensesDialogue> {
           ),
           Container(
             margin: EdgeInsets.fromLTRB(0, 16, 0, 0),
-            width: double.infinity,
+            width: size.width,
             alignment: Alignment.centerRight,
             child: RaisedButton(
-              color: Colors.blue,
+              color: Theme
+                  .of(context)
+                  .primaryColor,
               child: Text(
                 expense != null ? 'Save' : 'Add Expense',
                 style: TextStyle(color: Colors.white),
