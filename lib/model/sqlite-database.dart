@@ -13,9 +13,7 @@ class SingletonDatabase {
     return _instance;
   }
 
-  SingletonDatabase._internal() {
-    open();
-  }
+  SingletonDatabase._internal();
 
   Future<void> open() async {
     final path = await getDatabasesPath();
@@ -29,6 +27,7 @@ class SingletonDatabase {
   }
 
   Future<void> insert(Expense e) async {
+    open();
     final database = await _db;
     await database.insert(
       tableName,
@@ -42,7 +41,9 @@ class SingletonDatabase {
       await insert(i);
     }
   }
+
   Future<List<Expense>> getAll() async {
+    await open();
     final database = await _db;
     var maps = await database.query(tableName);
     return List.generate(maps.length, (i) {
@@ -55,12 +56,14 @@ class SingletonDatabase {
   }
 
   Future<void> delete(Expense e) async {
+    open();
     final database = await _db;
     await database
-        .delete(tableName, where: 'id = ?', whereArgs: [e.id]);
+        .delete(tableName, where: 'id = ?', whereArgs: <String>[e.id]);
   }
 
   Future<void> update(Expense e) async {
+    open();
     final database = await _db;
     await database
         .update(tableName, e.toMap(), where: 'id = ?', whereArgs: [e.id]);
