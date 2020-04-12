@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:personal_expenses_flutter/AddExpensesDialog.dart';
 import './model/Data.dart';
 import './utils/utils.dart';
@@ -73,21 +74,30 @@ class ExpenseList extends StatelessWidget {
                         ),
                       )),
                 ),
-                key: Key(index.toString()),
+                key: Key(Uuid().v4()),
                 onDismissed: (direction) {
                   removed = expenses[index];
                   onDeleteButtonClicked(index);
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text(
-                      'An item has been removed!',
-                    ),
-                    action: SnackBarAction(
-                      label: 'Undo',
+                  Flushbar flush;
+                  flush = Flushbar<bool>(
+                    message: 'An item has been removed!',
+                    duration: Duration(seconds: 5),
+                    flushbarStyle: FlushbarStyle.FLOATING,
+                    backgroundGradient:
+                        LinearGradient(colors: [Colors.blue, Colors.teal]),
+                    mainButton: FlatButton(
+                      child: Text(
+                        'Undo',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       onPressed: () {
                         onUndoEvent(Expense.from(removed));
+                        flush.dismiss(true);
                       },
                     ),
-                  ));
+                  )..show(context).then((value) {
+                      removed = null;
+                    });
                 },
                 child: ListTile(
                   leading: ClipOval(
