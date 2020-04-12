@@ -66,7 +66,7 @@ class _PersonalExpensesAppState extends State<PersonalExpensesApp> {
                   data.isEmpty
                       ? NothingAddedWidget()
                       : ExpenseList(
-                      data, _deleteElement, _editListElement, _addElement),
+                          data, _deleteElement, _editListElement, _addElement),
                 ],
               ),
             ),
@@ -94,11 +94,11 @@ class _PersonalExpensesAppState extends State<PersonalExpensesApp> {
   }
 
   void _deleteElement(int index) {
+    var db = SingletonDatabase();
+    db.delete(data[index]);
     setState(() {
       data.removeAt(index);
     });
-    var db = SingletonDatabase();
-    db.delete(data[index]);
   }
 
   void _addElement(Expense e) {
